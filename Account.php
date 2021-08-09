@@ -43,6 +43,12 @@ class Account {
         $this->balance -= $withdrawValue;
     }
     
+    // transfer method -----------------------------------------------------
+    public function transfer(float $transferValue, Account $destinationAccount) {
+        $this->withdraw($transferValue);
+        $destinationAccount->deposit($transferValue); 
+    }
+    
     // accessor methods -----------------------------------
     public function getHolderName(): string {
         return $this->holder->getName();

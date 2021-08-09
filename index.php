@@ -38,3 +38,12 @@ echo "Balance after deposit: {$account2->getBalance()}".PHP_EOL;
 $account2->withdraw(53.64);
 
 echo "Balance before withdraw: {$account2->getBalance()}".PHP_EOL;
+
+echo "//Test three ---------------------------------------".PHP_EOL;
+$account->transfer(12, $account2);
+echo "{$holder->getName()} balance: {$account->getBalance()}".PHP_EOL;
+echo "{$holder2->getName()} balance: {$account2->getBalance()}".PHP_EOL;
+
+$account2->transfer(20, $account);
+echo "{$holder->getName()} balance: {$account->getBalance()}".PHP_EOL;
+echo "{$holder2->getName()} balance: {$account2->getBalance()}".PHP_EOL;
