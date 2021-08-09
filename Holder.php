@@ -5,6 +5,8 @@
  * @author arauj
  */
 class Holder {
+
+    private Address $adress;
     private string $name;
     private CPF $cpfNumber;
     
@@ -18,9 +20,10 @@ class Holder {
     }
     
     //build the holder object
-    public function __construct(string $typedName, CPF $typedCPF ) {
+    public function __construct(string $typedName, CPF $typedCPF, Address $address ) {
         $this->name = $this->validateName($typedName);
         $this->cpfNumber = $typedCPF;
+        $this->address = $address;
     }
     
     //Show the holder name
@@ -32,5 +35,11 @@ class Holder {
     public function getCpfNumber(): string {
         return $this->cpfNumber->getNumber();
     }
+    
+    public function getAddress(): Adress {
+        return $this->address;
+    }
+
+
     
 }
