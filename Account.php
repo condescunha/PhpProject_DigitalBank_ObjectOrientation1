@@ -27,7 +27,20 @@ class Account {
     
     public function deposit(float $depositAmount) {
         $this->checkDepositAmount($depositAmount);
-        $this->balance = $depositAmount;
+        $this->balance += $depositAmount;
+    }
+    
+    // withdraw methods -----------------------------------------------------
+    private function checkWithdrawValue(float $withdrawValue) {
+        if ($withdrawValue <= 0 || $withdrawValue > $this->balance) {
+            echo "The withdraw value must be greater than zero and less than the balance.";
+            exit();
+        }
+    }
+    
+    public function withdraw(float $withdrawValue) {
+        $this->checkWithdrawValue($withdrawValue);
+        $this->balance -= $withdrawValue;
     }
     
     // accessor methods -----------------------------------

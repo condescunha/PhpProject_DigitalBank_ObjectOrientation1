@@ -9,24 +9,32 @@ require_once 'Account.php';
  * Date: 2021-08-07.
  */
 
-//Test one ---------------------------------------
+echo "//Test one ---------------------------------------".PHP_EOL;
 $cpf = new CPF("246.648.246-00");
 $holder = new Holder("Marcondes Araújo", $cpf);
 $account = new Account($holder);
 
 $account->deposit(352.50);
 
-echo $holder->getName().PHP_EOL;
-echo $holder->getCpfNumber().PHP_EOL;
-echo $account->getBalance().PHP_EOL;
+echo "Holder: {$holder->getName()}".PHP_EOL;
+echo "CPF: {$holder->getCpfNumber()}".PHP_EOL;
+echo "Balance after deposit: {$account->getBalance()}".PHP_EOL;
 
-//Test two ---------------------------------------
+$account->withdraw(146.25);
+
+echo "Balance before withdraw: {$account->getBalance()}".PHP_EOL;
+
+echo "//Test two ---------------------------------------".PHP_EOL;
 $cpf2 = new CPF("467.635.759-45");
 $holder2 = new Holder("Luana Araújo", $cpf2);
 $account2 = new Account($holder2);
 
 $account2->deposit(215.36);
 
-echo $holder2->getName().PHP_EOL;
-echo $holder2->getCpfNumber().PHP_EOL;
-echo $account2->getBalance().PHP_EOL;
+echo "Holder: {$holder2->getName()}".PHP_EOL;
+echo "CPF: {$holder2->getCpfNumber()}".PHP_EOL;
+echo "Balance after deposit: {$account2->getBalance()}".PHP_EOL;
+
+$account2->withdraw(53.64);
+
+echo "Balance before withdraw: {$account2->getBalance()}".PHP_EOL;
