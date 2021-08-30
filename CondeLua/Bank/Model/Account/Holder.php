@@ -1,4 +1,11 @@
 <?php
+namespace CondeLua\Bank\Model\Account;
+
+require_once 'CondeLua\Bank\Model\Person.php';
+
+use CondeLua\Bank\Model\Person;
+use CondeLua\Bank\Model\CPF;
+use CondeLua\Bank\Model\Address;
 /**
  * Description of Holder
  *
@@ -10,14 +17,12 @@ class Holder extends Person{
         
     //build the holder object
     public function __construct(string $name, CPF $cpf, Address $address) {
+        parent::__construct($name, $cpf);  
         $this->address = $address;
-        parent::__construct($name, $cpf);      
     }
        
     public function getAddress(): Adress {
         return $this->address;
     }
-
-
     
 }

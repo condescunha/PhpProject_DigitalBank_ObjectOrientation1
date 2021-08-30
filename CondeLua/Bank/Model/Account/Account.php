@@ -1,5 +1,5 @@
 <?php
-
+namespace CondeLua\Bank\Model\Account;
 /**
  * Description of Account
  *
@@ -15,6 +15,10 @@ class Account {
         $this->holder = $typedHolder;
         $this->balance = 0;
         self::$accountNumber++;
+    }
+    
+     public function __destruct(){
+        self::$accountNumber--;
     }
     
     // deposit methods -----------------------------------------------------
@@ -55,7 +59,7 @@ class Account {
     }
     
     public function getHolderCPF(): string {
-        return $this->holder->getCpfNumber();
+        return $this->holder->getCpf();
     }
     
     public function getBalance(): float {

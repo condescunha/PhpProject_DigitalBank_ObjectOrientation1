@@ -1,8 +1,15 @@
 <?php
-require_once 'CPF.php';
-require_once 'Address.php';
-require_once 'Holder.php';
-require_once 'Account.php';
+
+require_once 'CondeLua\Bank\Model\Address.php';
+require_once 'CondeLua\Bank\Model\Account\Holder.php';
+require_once 'CondeLua\Bank\Model\Person.php';
+require_once 'CondeLua\Bank\Model\CPF.php';
+require_once 'CondeLua\Bank\Model\Account\Account.php';
+
+use CondeLua\Bank\Model\Account\Holder;
+use CondeLua\Bank\Model\Address;
+use CondeLua\Bank\Model\CPF;
+use CondeLua\Bank\Model\Account\Account;
 
 /* 
  * Project Digital Bank for to study PHP language.
@@ -11,15 +18,15 @@ require_once 'Account.php';
  */
 
 echo "//Test one ---------------------------------------".PHP_EOL;
-$cpf = new CPF("246.648.246-00");
 $address = new Address("Campinas", "Taquaral", "Adalberto Maia", "12");
-$holder = new Holder("Marcondes Araújo", $cpf, $address);
+$cpf = new CPF("246.648.246-00");
+$holder = new Holder("Marcondes Araujo", $cpf, $address);
 $account = new Account($holder);
 
 $account->deposit(352.50);
 
-echo "Holder: {$holder->getName()}".PHP_EOL;
-echo "CPF: {$holder->getCpfNumber()}".PHP_EOL;
+echo "Holder: {$account->getHolderName()}".PHP_EOL;
+echo "CPF: {$account->getHolderCPF()}".PHP_EOL;
 echo "Balance after deposit: {$account->getBalance()}".PHP_EOL;
 
 $account->withdraw(146.25);
@@ -28,13 +35,13 @@ echo "Balance before withdraw: {$account->getBalance()}".PHP_EOL;
 
 echo "//Test two ---------------------------------------".PHP_EOL;
 $cpf2 = new CPF("467.635.759-45");
-$holder2 = new Holder("Luana Araújo", $cpf2, $address);
+$holder2 = new Holder("Luana Araujo", $cpf2, $address);
 $account2 = new Account($holder2);
 
 $account2->deposit(215.36);
 
-echo "Holder: {$holder2->getName()}".PHP_EOL;
-echo "CPF: {$holder2->getCpfNumber()}".PHP_EOL;
+echo "Holder: {$account2->getHolderName()}".PHP_EOL;
+echo "CPF: {$account2->getHolderCPF()}".PHP_EOL;
 echo "Balance after deposit: {$account2->getBalance()}".PHP_EOL;
 
 $account2->withdraw(53.64);
@@ -43,9 +50,9 @@ echo "Balance before withdraw: {$account2->getBalance()}".PHP_EOL;
 
 echo "//Test three ---------------------------------------".PHP_EOL;
 $account->transfer(12, $account2);
-echo "{$holder->getName()} balance: {$account->getBalance()}".PHP_EOL;
-echo "{$holder2->getName()} balance: {$account2->getBalance()}".PHP_EOL;
+echo "{$account->getHolderName()} balance: {$account->getBalance()}".PHP_EOL;
+echo "{$account2->getHolderName()} balance: {$account2->getBalance()}".PHP_EOL;
 
 $account2->transfer(20, $account);
-echo "{$holder->getName()} balance: {$account->getBalance()}".PHP_EOL;
-echo "{$holder2->getName()} balance: {$account2->getBalance()}".PHP_EOL;
+echo "{$account->getHolderName()} balance: {$account->getBalance()}".PHP_EOL;
+echo "{$account2->getHolderName()} balance: {$account2->getBalance()}".PHP_EOL;

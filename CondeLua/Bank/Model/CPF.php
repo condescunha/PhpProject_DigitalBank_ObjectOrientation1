@@ -1,4 +1,5 @@
 <?php
+namespace CondeLua\Bank\Model;
 /**
  * Description of CPF
  *

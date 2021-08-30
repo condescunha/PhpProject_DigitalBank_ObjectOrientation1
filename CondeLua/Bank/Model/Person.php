@@ -1,4 +1,5 @@
 <?php
+namespace CondeLua\Bank\Model;
 
 class Person {
     protected string $name;
@@ -6,6 +7,7 @@ class Person {
     
     public function __construct(string $name, CPF $cpf) {
         $this->validateName($name);
+        $this->name = $name;
         $this->cpf = $cpf;
     }
 
@@ -14,15 +16,14 @@ class Person {
     }
 
     public function getCpf(): string {
-        return $this->cpfNumber->getNumber();
+        return $this->cpf->getNumber();
     }
     
     //validate name length
-    protected function validateName(string $name): string{
+    protected function validateName(string $name){
         if (strlen($name) < 5) {
             echo "Name must be at least 5 characters long";
             exit();
         }
-        return $name;
     }
 }
