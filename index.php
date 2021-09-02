@@ -1,10 +1,5 @@
 <?php
-
-require_once 'CondeLua\Bank\Model\Address.php';
-require_once 'CondeLua\Bank\Model\Account\Holder.php';
-require_once 'CondeLua\Bank\Model\Person.php';
-require_once 'CondeLua\Bank\Model\CPF.php';
-require_once 'CondeLua\Bank\Model\Account\Account.php';
+require_once 'autoload.php';
 
 use CondeLua\Bank\Model\Account\Holder;
 use CondeLua\Bank\Model\Address;
