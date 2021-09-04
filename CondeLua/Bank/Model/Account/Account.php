@@ -6,7 +6,7 @@ namespace CondeLua\Bank\Model\Account;
  * @author arauj
  */
 
-class Account {
+abstract class Account {
     private Holder $holder;
     private float $balance;
     private static $accountNumber = 0;
@@ -20,7 +20,7 @@ class Account {
      public function __destruct(){
         self::$accountNumber--;
     }
-    
+
     // deposit methods -----------------------------------------------------
     private function checkDepositAmount(float $depositAmount) {
         if ($depositAmount <= 0) {
@@ -34,6 +34,9 @@ class Account {
         $this->balance += $depositAmount;
     }
     
+    // Fee percentage method ------------------------------------------------
+    abstract protected function feePercentage(): float;
+    
     // withdraw methods -----------------------------------------------------
     private function checkWithdrawValue(float $withdrawValue) {
         if ($withdrawValue <= 0 || $withdrawValue > $this->balance) {
@@ -43,14 +46,10 @@ class Account {
     }
     
     public function withdraw(float $withdrawValue) {
-        $this->checkWithdrawValue($withdrawValue);
-        $this->balance -= $withdrawValue;
-    }
-    
-    // transfer method -----------------------------------------------------
-    public function transfer(float $transferValue, Account $destinationAccount) {
-        $this->withdraw($transferValue);
-        $destinationAccount->deposit($transferValue); 
+        $withdrawFee = $withdrawValue * $this->feePercentage();
+        $withdrawalAmount = $withdrawValue + $withdrawFee;
+        $this->checkWithdrawValue($withdrawalAmount);
+        $this->balance -= $withdrawalAmount;
     }
     
     // accessor methods -----------------------------------

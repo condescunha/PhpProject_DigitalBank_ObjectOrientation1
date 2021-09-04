@@ -4,7 +4,8 @@ require_once 'autoload.php';
 use CondeLua\Bank\Model\Account\Holder;
 use CondeLua\Bank\Model\Address;
 use CondeLua\Bank\Model\CPF;
-use CondeLua\Bank\Model\Account\Account;
+use CondeLua\Bank\Model\Account\CheckingAccount;
+use CondeLua\Bank\Model\Account\SavingsAccount;
 
 /* 
  * Project Digital Bank for to study PHP language.
@@ -16,38 +17,49 @@ echo "//Test one ---------------------------------------".PHP_EOL;
 $address = new Address("Campinas", "Taquaral", "Adalberto Maia", "12");
 $cpf = new CPF("246.648.246-00");
 $holder = new Holder("Marcondes Araujo", $cpf, $address);
-$account = new Account($holder);
+$checkingAccount = new CheckingAccount($holder);
 
-$account->deposit(352.50);
+$checkingAccount->deposit(352.50);
 
-echo "Holder: {$account->getHolderName()}".PHP_EOL;
-echo "CPF: {$account->getHolderCPF()}".PHP_EOL;
-echo "Balance after deposit: {$account->getBalance()}".PHP_EOL;
+echo "Holder: {$checkingAccount->getHolderName()}".PHP_EOL;
+echo "CPF: {$checkingAccount->getHolderCPF()}".PHP_EOL;
+echo "Balance after deposit: {$checkingAccount->getBalance()}".PHP_EOL;
 
-$account->withdraw(146.25);
+$checkingAccount->withdraw(146.25);
 
-echo "Balance before withdraw: {$account->getBalance()}".PHP_EOL;
+echo "Balance before withdraw: {$checkingAccount->getBalance()}".PHP_EOL;
 
 echo "//Test two ---------------------------------------".PHP_EOL;
 $cpf2 = new CPF("467.635.759-45");
 $holder2 = new Holder("Luana Araujo", $cpf2, $address);
-$account2 = new Account($holder2);
+$checkingAccount2 = new CheckingAccount($holder2);
 
-$account2->deposit(215.36);
+$checkingAccount2->deposit(215.36);
 
-echo "Holder: {$account2->getHolderName()}".PHP_EOL;
-echo "CPF: {$account2->getHolderCPF()}".PHP_EOL;
-echo "Balance after deposit: {$account2->getBalance()}".PHP_EOL;
+echo "Holder: {$checkingAccount2->getHolderName()}".PHP_EOL;
+echo "CPF: {$checkingAccount2->getHolderCPF()}".PHP_EOL;
+echo "Balance after deposit: {$checkingAccount2->getBalance()}".PHP_EOL;
 
-$account2->withdraw(53.64);
+$checkingAccount2->withdraw(53.64);
 
-echo "Balance before withdraw: {$account2->getBalance()}".PHP_EOL;
+echo "Balance after withdraw: {$checkingAccount2->getBalance()}".PHP_EOL;
 
 echo "//Test three ---------------------------------------".PHP_EOL;
-$account->transfer(12, $account2);
-echo "{$account->getHolderName()} balance: {$account->getBalance()}".PHP_EOL;
-echo "{$account2->getHolderName()} balance: {$account2->getBalance()}".PHP_EOL;
+$checkingAccount->transfer(12, $checkingAccount2);
+echo "{$checkingAccount->getHolderName()} balance: {$checkingAccount->getBalance()}".PHP_EOL;
+echo "{$checkingAccount2->getHolderName()} balance: {$checkingAccount2->getBalance()}".PHP_EOL;
 
-$account2->transfer(20, $account);
-echo "{$account->getHolderName()} balance: {$account->getBalance()}".PHP_EOL;
-echo "{$account2->getHolderName()} balance: {$account2->getBalance()}".PHP_EOL;
+$checkingAccount2->transfer(20, $checkingAccount);
+echo "{$checkingAccount->getHolderName()} balance: {$checkingAccount->getBalance()}".PHP_EOL;
+echo "{$checkingAccount2->getHolderName()} balance: {$checkingAccount2->getBalance()}".PHP_EOL;
+
+echo "//Test four ---------------------------------------".PHP_EOL;
+$cpf3 = new CPF("672.457.326-03");
+$holder3 = new Holder("Miquéias Araujo", $cpf2, $address);
+$savingsAccount = new SavingsAccount($holder3);
+
+$savingsAccount->deposit(436.75);
+echo "Balance after deposit: {$savingsAccount->getBalance()}".PHP_EOL;
+
+$savingsAccount->withdraw(73.44);
+echo "Balance after withdraw: {$savingsAccount->getBalance()}".PHP_EOL;
