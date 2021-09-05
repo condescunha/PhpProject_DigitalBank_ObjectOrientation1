@@ -1,5 +1,5 @@
 <?php
-namespace CondeLua\Bank\Model;
+namespace CondeLua\Bank\Model\Abstraction;
 
 class Person {
     protected string $name;

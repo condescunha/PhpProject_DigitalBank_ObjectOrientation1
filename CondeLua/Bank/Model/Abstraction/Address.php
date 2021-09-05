@@ -1,5 +1,5 @@
 <?php
-namespace CondeLua\Bank\Model;
+namespace CondeLua\Bank\Model\Abstraction;
 
 class Address {
     private string $city;
