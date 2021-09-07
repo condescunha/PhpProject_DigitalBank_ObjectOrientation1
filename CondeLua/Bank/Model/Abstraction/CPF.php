@@ -5,7 +5,7 @@ namespace CondeLua\Bank\Model\Abstraction;
  *
  * @author arauj
  */
-class CPF 
+final class CPF 
 {
     private string $number;
     

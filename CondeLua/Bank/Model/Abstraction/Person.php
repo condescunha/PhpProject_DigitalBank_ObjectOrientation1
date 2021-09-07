@@ -20,7 +20,7 @@ class Person {
     }
     
     //validate name length
-    protected function validateName(string $name){
+    final protected function validateName(string $name){
         if (strlen($name) < 5) {
             echo "Name must be at least 5 characters long";
             exit();

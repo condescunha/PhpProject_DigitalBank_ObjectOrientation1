@@ -66,5 +66,9 @@ echo "Balance after deposit: {$savingsAccount->getBalance()}" . PHP_EOL;
 $savingsAccount->withdraw(73.44);
 echo "Balance after withdraw: {$savingsAccount->getBalance()}" . PHP_EOL;
 
+echo "//Test five ---------------------------------------" . PHP_EOL;
 $authenticator = new Authenticator();
 $authenticator->tryToLogin($holder3, "abcd");
+
+echo "//Test six ---------------------------------------" . PHP_EOL;
+echo $address;
