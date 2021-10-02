@@ -28,9 +28,13 @@ abstract class Account {
     // deposit methods -----------------------------------------------------
     private function checkDepositAmount(float $depositAmount) {
         if ($depositAmount <= 0) {
-            echo "The deposit amount must be greater than zero.";
-            exit();
+            /*
+             * echo "The deposit amount must be greater than zero.";
+             * exit();
+             */
+            throw new \InvalidArgumentException("The deposit value must be positive!");
         }
+        
     }
 
     public function deposit(float $depositAmount) {
@@ -43,9 +47,12 @@ abstract class Account {
 
     // withdraw methods -----------------------------------------------------
     private function checkWithdrawValue(float $withdrawValue) {
-        if ($withdrawValue <= 0 || $withdrawValue > $this->balance) {
-            echo "The withdraw value must be greater than zero and less than the balance.";
-            exit();
+        if ($withdrawValue < 0 || $withdrawValue > $this->balance) {
+            /*
+             * echo "The withdraw value must be greater than zero and less than the balance.";
+             * exit();
+             */
+            throw new InsufficientBalanceException($withdrawValue, $this->balance);
         }
     }
 

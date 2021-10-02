@@ -6,6 +6,7 @@ use CondeLua\Bank\Model\Abstraction\Address;
 use CondeLua\Bank\Model\Abstraction\CPF;
 use CondeLua\Bank\Model\Account\CheckingAccount;
 use CondeLua\Bank\Model\Account\Holder;
+use CondeLua\Bank\Model\Account\InsufficientBalanceException;
 use CondeLua\Bank\Model\Account\SavingsAccount;
 use CondeLua\Bank\Service\Authenticator;
 
@@ -21,13 +22,17 @@ $cpf = new CPF("246.648.246-00");
 $holder = new Holder("Marcondes Araujo", $cpf, $address);
 $checkingAccount = new CheckingAccount($holder);
 
-$checkingAccount->deposit(352.50);
+$checkingAccount->deposit(345.89);
 
 echo "Holder: {$checkingAccount->getHolderName()}" . PHP_EOL;
 echo "CPF: {$checkingAccount->getHolderCPF()}" . PHP_EOL;
 echo "Balance after deposit: {$checkingAccount->getBalance()}" . PHP_EOL;
 
-$checkingAccount->withdraw(146.25);
+try { 
+    $checkingAccount->withdraw(-5);
+} catch (InsufficientBalanceException $exc) {
+    echo $exc->getMessage(). PHP_EOL;
+}
 
 echo "Balance before withdraw: {$checkingAccount->getBalance()}" . PHP_EOL;
 
@@ -36,22 +41,32 @@ $cpf2 = new CPF("467.635.759-45");
 $holder2 = new Holder("Luana Araujo", $cpf2, $address);
 $checkingAccount2 = new CheckingAccount($holder2);
 
-$checkingAccount2->deposit(215.36);
+try {
+    $deposit = -25;
+    $checkingAccount2->deposit($deposit);
+} catch (InvalidArgumentException $exc) {
+    echo $exc->getMessage().PHP_EOL;
+    echo "Deposit value: {$deposit}.".PHP_EOL;
+}
 
 echo "Holder: {$checkingAccount2->getHolderName()}" . PHP_EOL;
 echo "CPF: {$checkingAccount2->getHolderCPF()}" . PHP_EOL;
 echo "Balance after deposit: {$checkingAccount2->getBalance()}" . PHP_EOL;
 
-$checkingAccount2->withdraw(53.64);
-
-echo "Balance after withdraw: {$checkingAccount2->getBalance()}" . PHP_EOL;
-
 echo "//Test three ---------------------------------------" . PHP_EOL;
-$checkingAccount->transfer(12, $checkingAccount2);
+try {
+    $checkingAccount->transfer(12, $checkingAccount2);
+} catch (InsufficientBalanceException $exc) {
+    echo $exc->getMessage().PHP_EOL;
+}
 echo "{$checkingAccount->getHolderName()} balance: {$checkingAccount->getBalance()}" . PHP_EOL;
 echo "{$checkingAccount2->getHolderName()} balance: {$checkingAccount2->getBalance()}" . PHP_EOL;
 
-$checkingAccount2->transfer(20, $checkingAccount);
+try {
+    $checkingAccount2->transfer(20, $checkingAccount);
+} catch (InsufficientBalanceException $exc) {
+    echo $exc->getMessage().PHP_EOL;
+}
 echo "{$checkingAccount->getHolderName()} balance: {$checkingAccount->getBalance()}" . PHP_EOL;
 echo "{$checkingAccount2->getHolderName()} balance: {$checkingAccount2->getBalance()}" . PHP_EOL;
 
